@@ -1,0 +1,26 @@
+{
+  "name": "hubspot",
+  "integrationName": "hubspot",
+  "scripts": {
+    "version": "bp --version",
+    "login": "bp login",
+    "dev": "bp dev",
+    "gen": "bp gen",
+    "deploy": "bp deploy",
+    "type:check": "tsc --noEmit"
+  },
+  "private": true,
+  "dependencies": {
+    "@botpress/client": "0.20.1",
+    "@botpress/sdk": "0.8.22",
+    "@hubspot/api-client": "^11.1.0",
+    "axios": "^1.7.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@botpress/cli": "^0.8.27",
+    "@types/node": "^18.19.34",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.9.5"
+  }
+}
