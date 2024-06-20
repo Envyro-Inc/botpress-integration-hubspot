@@ -1,4 +1,3 @@
-
 # HubSpot CRM Integration
 
 This integration allows you to connect Botpress with HubSpot CRM, enabling various CRM operations directly through your chatbot.
