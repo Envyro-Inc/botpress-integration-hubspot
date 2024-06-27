@@ -1,4 +1,5 @@
 import { getClient } from 'src/client'
+import * as bpclient from "@botpress/client";
 import type { RegisterFunction } from '../misc/types'
 
 export const register: RegisterFunction = async ({ ctx, client, logger }) => {
@@ -14,6 +15,9 @@ export const register: RegisterFunction = async ({ ctx, client, logger }) => {
     logger.forBot().info(`Successfully retrieved ${JSON.stringify(result)} contacts`)
   } catch (error) {
     logger.forBot().error("Failed to access HubSpot: Check configuration", error)
-    return;
+
+    throw new bpclient.RuntimeError(
+      "Configuration Error! Unknown error."
+    );
   }
 }
