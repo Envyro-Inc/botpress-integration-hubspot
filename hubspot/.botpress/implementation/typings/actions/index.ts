@@ -11,6 +11,8 @@ import * as deleteDeal from "./deleteDeal/index";
 export * as deleteDeal from "./deleteDeal/index";
 import * as updateDealStage from "./updateDealStage/index";
 export * as updateDealStage from "./updateDealStage/index";
+import * as searchDeals from "./searchDeals/index";
+export * as searchDeals from "./searchDeals/index";
 import * as createContact from "./createContact/index";
 export * as createContact from "./createContact/index";
 import * as updateContact from "./updateContact/index";
@@ -50,6 +52,7 @@ export type Actions = {
   "updateDeal": updateDeal.UpdateDeal;
   "deleteDeal": deleteDeal.DeleteDeal;
   "updateDealStage": updateDealStage.UpdateDealStage;
+  "searchDeals": searchDeals.SearchDeals;
   "createContact": createContact.CreateContact;
   "updateContact": updateContact.UpdateContact;
   "getContact": getContact.GetContact;

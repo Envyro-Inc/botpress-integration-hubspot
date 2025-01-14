@@ -19,7 +19,7 @@ export * as entities from "./entities/index"
 
 export type TIntegration = {
   name: "hubspot"
-  version: "24.6.0"
+  version: "25.1.0"
   user: { "tags": { "id": { "title": "HubSpot API Key" } }, "creation": { "enabled": false, "requiredTags": [] } }
   configuration: configuration.Configuration
   configurations: configurations.Configurations

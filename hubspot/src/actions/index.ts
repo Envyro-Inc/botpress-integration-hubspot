@@ -19,6 +19,7 @@ import { getDeal } from './get-deal';
 import { updateDeal } from './update-deal'
 import { deleteDeal } from './delete-deal';
 import { updateDealStage } from './update-deal-stage';
+import { searchDeals } from './search-deals';
 
 
 
@@ -43,5 +44,6 @@ export default {
   getDeal,
   updateDeal,
   deleteDeal,
-  updateDealStage
+  updateDealStage,
+  searchDeals
 };

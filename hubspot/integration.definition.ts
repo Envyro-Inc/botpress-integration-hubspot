@@ -51,7 +51,7 @@ import {
 
 export default new IntegrationDefinition({
   name: integrationName ?? 'hubspot',
-  version: '24.6.0',
+  version: '25.1.0',
   title: 'HubSpot',
   readme: 'hub.md',
   icon: 'icon.svg',
