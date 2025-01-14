@@ -1,0 +1,57 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PromiseTokensApi = exports.PromiseRefreshTokensApi = exports.PromiseAccessTokensApi = void 0;
+const ObservableAPI_1 = require("./ObservableAPI");
+class PromiseAccessTokensApi {
+    constructor(configuration, requestFactory, responseProcessor) {
+        this.api = new ObservableAPI_1.ObservableAccessTokensApi(configuration, requestFactory, responseProcessor);
+    }
+    getWithHttpInfo(token, _options) {
+        const result = this.api.getWithHttpInfo(token, _options);
+        return result.toPromise();
+    }
+    get(token, _options) {
+        const result = this.api.get(token, _options);
+        return result.toPromise();
+    }
+}
+exports.PromiseAccessTokensApi = PromiseAccessTokensApi;
+const ObservableAPI_2 = require("./ObservableAPI");
+class PromiseRefreshTokensApi {
+    constructor(configuration, requestFactory, responseProcessor) {
+        this.api = new ObservableAPI_2.ObservableRefreshTokensApi(configuration, requestFactory, responseProcessor);
+    }
+    archiveWithHttpInfo(token, _options) {
+        const result = this.api.archiveWithHttpInfo(token, _options);
+        return result.toPromise();
+    }
+    archive(token, _options) {
+        const result = this.api.archive(token, _options);
+        return result.toPromise();
+    }
+    getWithHttpInfo(token, _options) {
+        const result = this.api.getWithHttpInfo(token, _options);
+        return result.toPromise();
+    }
+    get(token, _options) {
+        const result = this.api.get(token, _options);
+        return result.toPromise();
+    }
+}
+exports.PromiseRefreshTokensApi = PromiseRefreshTokensApi;
+const ObservableAPI_3 = require("./ObservableAPI");
+class PromiseTokensApi {
+    constructor(configuration, requestFactory, responseProcessor) {
+        this.api = new ObservableAPI_3.ObservableTokensApi(configuration, requestFactory, responseProcessor);
+    }
+    createWithHttpInfo(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _options) {
+        const result = this.api.createWithHttpInfo(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _options);
+        return result.toPromise();
+    }
+    create(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _options) {
+        const result = this.api.create(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _options);
+        return result.toPromise();
+    }
+}
+exports.PromiseTokensApi = PromiseTokensApi;
+//# sourceMappingURL=PromiseAPI.js.map

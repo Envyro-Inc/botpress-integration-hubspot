@@ -1,0 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PublicAssociationDefinitionCreateRequest = void 0;
+class PublicAssociationDefinitionCreateRequest {
+    static getAttributeTypeMap() {
+        return PublicAssociationDefinitionCreateRequest.attributeTypeMap;
+    }
+    constructor() {
+    }
+}
+exports.PublicAssociationDefinitionCreateRequest = PublicAssociationDefinitionCreateRequest;
+PublicAssociationDefinitionCreateRequest.discriminator = undefined;
+PublicAssociationDefinitionCreateRequest.attributeTypeMap = [
+    {
+        "name": "inverseLabel",
+        "baseName": "inverseLabel",
+        "type": "string",
+        "format": ""
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string",
+        "format": ""
+    },
+    {
+        "name": "label",
+        "baseName": "label",
+        "type": "string",
+        "format": ""
+    }
+];
+//# sourceMappingURL=PublicAssociationDefinitionCreateRequest.js.map

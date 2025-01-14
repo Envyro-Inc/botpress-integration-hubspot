@@ -1,0 +1,35 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ObjectDefinitionsApi = void 0;
+const ObservableAPI_1 = require("./ObservableAPI");
+class ObjectDefinitionsApi {
+    constructor(configuration, requestFactory, responseProcessor) {
+        this.api = new ObservableAPI_1.ObservableDefinitionsApi(configuration, requestFactory, responseProcessor);
+    }
+    archiveWithHttpInfo(param, options) {
+        return this.api.archiveWithHttpInfo(param.fromObjectType, param.toObjectType, param.associationTypeId, options).toPromise();
+    }
+    archive(param, options) {
+        return this.api.archive(param.fromObjectType, param.toObjectType, param.associationTypeId, options).toPromise();
+    }
+    createWithHttpInfo(param, options) {
+        return this.api.createWithHttpInfo(param.fromObjectType, param.toObjectType, param.publicAssociationDefinitionCreateRequest, options).toPromise();
+    }
+    create(param, options) {
+        return this.api.create(param.fromObjectType, param.toObjectType, param.publicAssociationDefinitionCreateRequest, options).toPromise();
+    }
+    getAllWithHttpInfo(param, options) {
+        return this.api.getAllWithHttpInfo(param.fromObjectType, param.toObjectType, options).toPromise();
+    }
+    getAll(param, options) {
+        return this.api.getAll(param.fromObjectType, param.toObjectType, options).toPromise();
+    }
+    updateWithHttpInfo(param, options) {
+        return this.api.updateWithHttpInfo(param.fromObjectType, param.toObjectType, param.publicAssociationDefinitionUpdateRequest, options).toPromise();
+    }
+    update(param, options) {
+        return this.api.update(param.fromObjectType, param.toObjectType, param.publicAssociationDefinitionUpdateRequest, options).toPromise();
+    }
+}
+exports.ObjectDefinitionsApi = ObjectDefinitionsApi;
+//# sourceMappingURL=ObjectParamAPI.js.map

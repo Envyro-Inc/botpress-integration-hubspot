@@ -1,0 +1,35 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PromiseBatchApi = void 0;
+const ObservableAPI_1 = require("./ObservableAPI");
+class PromiseBatchApi {
+    constructor(configuration, requestFactory, responseProcessor) {
+        this.api = new ObservableAPI_1.ObservableBatchApi(configuration, requestFactory, responseProcessor);
+    }
+    archiveWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociation, _options) {
+        const result = this.api.archiveWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
+        return result.toPromise();
+    }
+    archive(fromObjectType, toObjectType, batchInputPublicAssociation, _options) {
+        const result = this.api.archive(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
+        return result.toPromise();
+    }
+    createWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociation, _options) {
+        const result = this.api.createWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
+        return result.toPromise();
+    }
+    create(fromObjectType, toObjectType, batchInputPublicAssociation, _options) {
+        const result = this.api.create(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
+        return result.toPromise();
+    }
+    readWithHttpInfo(fromObjectType, toObjectType, batchInputPublicObjectId, _options) {
+        const result = this.api.readWithHttpInfo(fromObjectType, toObjectType, batchInputPublicObjectId, _options);
+        return result.toPromise();
+    }
+    read(fromObjectType, toObjectType, batchInputPublicObjectId, _options) {
+        const result = this.api.read(fromObjectType, toObjectType, batchInputPublicObjectId, _options);
+        return result.toPromise();
+    }
+}
+exports.PromiseBatchApi = PromiseBatchApi;
+//# sourceMappingURL=PromiseAPI.js.map

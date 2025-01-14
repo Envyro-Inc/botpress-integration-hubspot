@@ -12,11 +12,13 @@ This integration allows you to connect Botpress with HubSpot CRM, enabling vario
     - [Contacts](#contacts)
     - [Companies](#companies)
     - [Tickets](#tickets)
+    - [Deals](#deals)
     - [Other](#other)
 5. [Search](#search)
     - [Search for Companies](#search-for-companies)
     - [Search for Contacts](#search-for-contacts)
     - [Search for Tickets](#search-for-tickets)
+    - [Search for Deals](#search-for-deals)
 6. [Using Actions](#using-actions)
     - [Contacts](#contacts-1)
     - [Companies](#companies-1)
@@ -25,25 +27,6 @@ This integration allows you to connect Botpress with HubSpot CRM, enabling vario
         - [Example 1: Using AND logic within a filter group](#example-1-using-and-logic-within-a-filter-group)
         - [Example 2: Using OR logic between filter groups](#example-2-using-or-logic-between-filter-groups)
         - [Example 3: Combining AND and OR logic](#example-3-combining-and-and-or-logic)
-7. [Properties](#properties)
-
-
-1. [Introduction](#introduction)
-2. [Seeing Property IDs](#seeing-property-ids)
-3. [Finding Property IDs](#finding-property-ids)
-4. [Actions](#actions)
-    - [Contacts](#contacts)
-    - [Companies](#companies)
-    - [Tickets](#tickets)
-    - [Other](#other)
-5. [Search](#search)
-    - [Search for Companies](#search-for-companies)
-    - [Search for Contacts](#search-for-contacts)
-    - [Search for Tickets](#search-for-tickets)
-6. [Using Actions](#using-actions)
-    - [Contacts](#contacts-1)
-    - [Companies](#companies-1)
-    - [Tickets](#tickets-1)
 7. [Properties](#properties)
 
 ## Introduction
@@ -83,6 +66,14 @@ You can find the properties and their IDs at this link: [HubSpot Property Settin
 - Delete a Ticket
 - Update a Ticket
 - Search Tickets
+
+### Deals
+
+- Get a Deal
+- Create a Deal
+- Delete a Deal
+- Update a Deal
+- Search Deal
 
 ### Other
 
@@ -168,6 +159,31 @@ You can find the properties and their IDs at this link: [HubSpot Property Settin
   "properties": ["createdate", "subject", "content", "status"],
   "limit": 100,
   "after": 0
+}
+```
+
+#### Search for Deals
+
+```json
+{
+  "filterGroups": [
+    {
+      "filters": [
+        {
+          "propertyName": "amount",
+          "operator": "GT",
+          "value": "10000"
+        },
+        {
+          "propertyName": "dealstage",
+          "operator": "EQ",
+          "value": "closedwon"
+        }
+      ]
+    }
+  ],
+  "sorts": ["amount"],
+  "limit": 10
 }
 ```
 
@@ -321,6 +337,60 @@ Perform a partial update of a ticket identified by `{ticketId}`. `{ticketId}` re
   "properties": {
     "status": "closed"
   }
+}
+```
+
+### Deals
+
+#### Get a Deal
+
+To get a deal, provide the deal ID.
+
+```json
+{
+  "dealId": "32032106769"
+}
+```
+
+#### Create a Deal
+
+```json
+{
+  "properties": {
+    "dealname": "New Deal",
+    "amount": "10000",
+    "dealstage": "qualifiedtobuy",
+    "closedate": "2025-12-31"
+  }
+}
+```
+
+#### Delete a Deal
+
+```json
+{
+  "dealId": "32032106769"
+}
+```
+
+#### Update a Deal
+
+```json
+{
+  "dealId": "32032106769",
+  "properties": {
+    "dealname": "Updated Deal Name",
+    "amount": "15000"
+  }
+}
+```
+
+#### Update Deal Stage
+
+```json
+{
+  "dealId": "32032106769",
+  "stage": "closedwon"
 }
 ```
 
