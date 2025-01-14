@@ -20,6 +20,9 @@ import { Client } from "@hubspot/api-client";
  * - searchContacts: Searches for contacts based on given filters.
  * - searchCompanies: Searches for companies based on given filters.
  * - searchTickets: Searches for tickets based on given filters.
+ * - createDeal: Creates a new deal in HubSpot
+ * - getDeal: Retrieves a deal from HubSpot by ID
+ * - deleteDeal: Deletes a deal from HubSpot by ID
  */
 
 export class HubSpotApi {
@@ -28,6 +31,108 @@ export class HubSpotApi {
   constructor(apiKey: string) {
     this.hubspotClient = new Client({ accessToken: apiKey });
   }
+
+  /**
+    * Creates a new deal in HubSpot.
+    * @param {Object} dealData - The data of the deal to create.
+    * @returns {Promise<Object>} A promise that resolves to the result of the operation.
+    */
+  async createDeal(dealData: any) {
+    try {
+      const result = await this.hubspotClient.crm.deals.basicApi.create(dealData);
+      return { success: true, message: "Deal created successfully", data: result };
+    } catch (error: unknown) {
+      if (error instanceof Error && error.message.includes("Deal already exists")) {
+        const existingIdMatch = error.message.match(/Existing ID: (\d+)/);
+        const existingId = existingIdMatch ? existingIdMatch[1] : null;
+        return { success: false, message: `Deal already exists with ID: ${existingId}`, data: existingId };
+      } else if (error instanceof Error) {
+        throw new Error(`Unexpected error: ${error.message}`);
+      } else {
+        throw new Error("An unknown error occurred while creating the deal");
+      }
+    }
+  }
+
+  /**
+   * Retrieves a deal from HubSpot by ID.
+   * @param {string} dealId - The ID of the deal to retrieve.
+   * @returns {Promise<Object>} A promise that resolves to the result of the operation.
+   */
+  async getDeal(dealId: string) {
+    try {
+      const result = await this.hubspotClient.crm.deals.basicApi.getById(dealId);
+      return { success: true, message: 'Deal fetched successfully', data: result };
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(`Failed to fetch deal: ${error.message}`);
+      } else {
+        throw new Error('An unknown error occurred while fetching the deal');
+      }
+    }
+  }
+
+  /**
+   * Updates an existing deal in HubSpot by ID.
+   * @param {string} dealId - The ID of the deal to update.
+   * @param {Object} dealData - The properties of the deal to update.
+   * @returns {Promise<Object>} A promise that resolves to the result of the operation.
+   */
+  async updateDeal(dealId: string, dealData: any) {
+    try {
+      const result = await this.hubspotClient.crm.deals.basicApi.update(dealId, {
+        properties: dealData,
+      });
+      return { success: true, message: 'Deal updated successfully', data: result };
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(`Failed to update deal: ${error.message}`);
+      } else {
+        throw new Error('An unknown error occurred while updating the deal');
+      }
+    }
+  }
+
+  /**
+   * Deletes a deal from HubSpot by ID.
+   * @param {string} dealId - The ID of the deal to delete.
+   * @returns {Promise<void>} A promise that resolves if the operation succeeds.
+   */
+  async deleteDeal(dealId: string) {
+    try {
+      await this.hubspotClient.crm.deals.basicApi.archive(dealId);
+      return { success: true, message: `Deal with ID ${dealId} deleted successfully` };
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(`Failed to delete deal: ${error.message}`);
+      } else {
+        throw new Error('An unknown error occurred while deleting the deal');
+      }
+    }
+  }
+
+  /**
+   * Updates properties of an existing deal in HubSpot.
+   * @param {string} dealId - The ID of the deal to update.
+   * @param {Object} dealData - The properties to update (e.g., { dealstage: "new_stage_id" }).
+   * @returns {Promise<Object>} A promise that resolves to the result of the operation.
+   */
+  async updateDealStage(dealId: string, dealData: any) {
+    try {
+      const result = await this.hubspotClient.crm.deals.basicApi.update(dealId, {
+        properties: dealData,
+      });
+      return { success: true, message: 'Deal updated successfully', data: result };
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(`Failed to update deal: ${error.message}`);
+      } else {
+        throw new Error('An unknown error occurred while updating the deal');
+      }
+    }
+  }
+
+
 
   /**
    * Retrieves a contact from HubSpot by ID.
@@ -218,6 +323,16 @@ async makeApiCall(endpoint: string, method: string, data: any) {
   async searchTickets(searchQuery: any) {
     const result = await this.hubspotClient.crm.tickets.searchApi.doSearch(searchQuery);
     return { success: true, message: "Tickets fetched successfully", data: result };
+  }
+
+  /**
+   * Searches for deals based on given filters.
+   * @param {Object} searchQuery - The search query object.
+   * @returns {Promise<Object>} A promise that resolves to the result of the operation.
+   */
+  async searchDeals(searchQuery: any) {
+    const result = await this.hubspotClient.crm.deals.searchApi.doSearch(searchQuery);
+    return { success: true, message: "Deals fetched successfully", data: result };
   }
 }
 

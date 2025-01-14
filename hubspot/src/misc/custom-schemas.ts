@@ -4,6 +4,82 @@ import { z } from '@botpress/sdk'
 Action Schemas
 */
 
+/*
+          Deal Schemas
+*/
+
+// Create Deal
+export const createDealInputSchema = z.object({
+  properties: z.string().describe('Properties of the deal to create, as a string JSON object.')
+});
+
+export const createDealOutputSchema = z.object({
+  success: z.boolean(),
+  message: z.string(),
+  data: z.string()
+});
+
+// Get Deal
+export const getDealInputSchema = z.object({
+  dealId: z.string().describe('ID of the deal to retrieve')
+});
+
+export const getDealOutputSchema = z.object({
+  success: z.boolean(),
+  message: z.string(),
+  data: z.string()
+});
+
+// Update Deal
+export const updateDealInputSchema = z.object({
+  dealId: z.string().describe('ID of the deal to update'),
+  properties: z.string().describe('Properties of the deal to update, as a string JSON object.')
+});
+
+export const updateDealOutputSchema = z.object({
+  success: z.boolean(),
+  message: z.string(),
+  data: z.string()
+});
+
+// Delete Deal
+export const deleteDealInputSchema = z.object({
+  dealId: z.string().describe('ID of the deal to delete')
+});
+
+export const deleteDealOutputSchema = z.object({
+  success: z.boolean(),
+  message: z.string()
+});
+
+// Manage Deal Stage
+export const updateDealStageInputSchema = z.object({
+  dealId: z.string().describe('ID of the deal to update stage'),
+  stage: z.string().describe('New stage for the deal')
+});
+
+export const updateDealStageOutputSchema = z.object({
+  success: z.boolean(),
+  message: z.string(),
+  data: z.string()
+});
+
+// Search Deals
+export const searchDealsInputSchema = z.object({
+  query: z.string().describe('Search query for deals as a string JSON object.'),
+});
+
+export const searchDealsOutputSchema = z.object({
+  success: z.boolean(),
+  message: z.string(),
+  data: z.string(),
+});
+
+
+/*
+          Contact Schemas
+*/
+
 // Create Contact
 export const createContactInputSchema = z.object({
   properties: z.string().describe('Properties of the contact to create, as a string JSON object.')
@@ -49,6 +125,10 @@ export const deleteContactOutputSchema = z.object({
   data: z.string()
 })
 
+/*
+          Company Schemas
+*/
+
 // Create Company
 export const createCompanyInputSchema = z.object({
   properties: z.string().describe('Properties of the company to create, as a string JSON object.')
@@ -93,6 +173,10 @@ export const deleteCompanyOutputSchema = z.object({
   message: z.string(),
 
 })
+
+/*
+          Ticket Schemas
+*/
 
 // Create Ticket
 export const createTicketInputSchema = z.object({
@@ -142,6 +226,10 @@ export const deleteTicketOutputSchema = z.object({
 Search Schemas
 */
 
+/*
+          Contact Schemas
+*/
+
 // Search Contacts
 export const searchContactsInputSchema = z.object({
   query: z.string().describe('Search query for contacts as a string JSON object.')
@@ -152,6 +240,10 @@ export const searchContactsOutputSchema = z.object({
   message: z.string(),
   data: z.string()
 });
+
+/*
+          Company Schemas
+*/
 
 // Search Companies
 export const searchCompaniesInputSchema = z.object({
@@ -164,6 +256,9 @@ export const searchCompaniesOutputSchema = z.object({
   data: z.string() 
 });
 
+/*
+          Ticket Schemas
+*/
 
 // Search Tickets
 export const searchTicketsInputSchema = z.object({
@@ -175,6 +270,10 @@ export const searchTicketsOutputSchema = z.object({
   message: z.string(),
   data: z.string() 
 });
+
+/*
+Make API Call Schema
+*/
 
 // Make API Call
 export const makeApiCallInputSchema = z.object({

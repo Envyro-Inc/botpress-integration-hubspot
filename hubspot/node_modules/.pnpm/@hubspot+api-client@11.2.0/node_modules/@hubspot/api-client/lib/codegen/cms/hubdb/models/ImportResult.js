@@ -1,0 +1,39 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ImportResult = void 0;
+class ImportResult {
+    static getAttributeTypeMap() {
+        return ImportResult.attributeTypeMap;
+    }
+    constructor() {
+    }
+}
+exports.ImportResult = ImportResult;
+ImportResult.discriminator = undefined;
+ImportResult.attributeTypeMap = [
+    {
+        "name": "rowLimitExceeded",
+        "baseName": "rowLimitExceeded",
+        "type": "boolean",
+        "format": ""
+    },
+    {
+        "name": "duplicateRows",
+        "baseName": "duplicateRows",
+        "type": "number",
+        "format": "int32"
+    },
+    {
+        "name": "rowsImported",
+        "baseName": "rowsImported",
+        "type": "number",
+        "format": "int32"
+    },
+    {
+        "name": "errors",
+        "baseName": "errors",
+        "type": "Array<Error>",
+        "format": ""
+    }
+];
+//# sourceMappingURL=ImportResult.js.map

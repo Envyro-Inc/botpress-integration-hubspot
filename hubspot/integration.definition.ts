@@ -35,6 +35,18 @@ import {
   searchCompaniesOutputSchema,
   searchTicketsInputSchema,
   searchTicketsOutputSchema,
+  createDealInputSchema, // New Deal schemas
+  createDealOutputSchema,
+  getDealInputSchema,
+  getDealOutputSchema,
+  updateDealInputSchema,
+  updateDealOutputSchema,
+  deleteDealInputSchema,
+  deleteDealOutputSchema,
+  updateDealStageInputSchema,
+  updateDealStageOutputSchema,
+  searchDealsInputSchema,
+  searchDealsOutputSchema
 } from './src/misc/custom-schemas';
 
 export default new IntegrationDefinition({
@@ -61,6 +73,60 @@ export default new IntegrationDefinition({
   channels: {},
   states: {},
   actions: {
+    createDeal: {
+      title: 'Create Deal',
+      input: {
+        schema: createDealInputSchema,
+      },
+      output: {
+        schema: createDealOutputSchema,
+      },
+    },
+    getDeal: {
+      title: 'Get Deal',
+      input: {
+        schema: getDealInputSchema,
+      },
+      output: {
+        schema: getDealOutputSchema,
+      },
+    },
+    updateDeal: {
+      title: 'Update Deal',
+      input: {
+        schema: updateDealInputSchema,
+      },
+      output: {
+        schema: updateDealOutputSchema,
+      },
+    },
+    deleteDeal: {
+      title: 'Delete Deal',
+      input: {
+        schema: deleteDealInputSchema,
+      },
+      output: {
+        schema: deleteDealOutputSchema,
+      },
+    },
+    updateDealStage: {
+      title: 'Update Deal Stage',
+      input: {
+        schema: updateDealStageInputSchema,
+      },
+      output: {
+        schema: updateDealStageOutputSchema,
+      },
+    },
+    searchDeals: {
+      title: 'Search Deals',
+      input: {
+        schema: searchDealsInputSchema,
+      },
+      output: {
+        schema: searchDealsOutputSchema,
+      },
+    },    
     createContact: {
       title: 'Create Contact',
       input: {

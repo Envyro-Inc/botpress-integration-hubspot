@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BatchInputSimplePublicObjectBatchInputUpsert = void 0;
+class BatchInputSimplePublicObjectBatchInputUpsert {
+    static getAttributeTypeMap() {
+        return BatchInputSimplePublicObjectBatchInputUpsert.attributeTypeMap;
+    }
+    constructor() {
+    }
+}
+exports.BatchInputSimplePublicObjectBatchInputUpsert = BatchInputSimplePublicObjectBatchInputUpsert;
+BatchInputSimplePublicObjectBatchInputUpsert.discriminator = undefined;
+BatchInputSimplePublicObjectBatchInputUpsert.attributeTypeMap = [
+    {
+        "name": "inputs",
+        "baseName": "inputs",
+        "type": "Array<SimplePublicObjectBatchInputUpsert>",
+        "format": ""
+    }
+];
+//# sourceMappingURL=BatchInputSimplePublicObjectBatchInputUpsert.js.map

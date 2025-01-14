@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const index_1 = require("../../../../../codegen/crm/objects/leads/index");
+const index_2 = require("../../../../../index");
+describe('api client', () => {
+    it('is discoverable', () => {
+        const client = new index_2.Client().crm.objects.leads;
+        expect(client.hasOwnProperty('basicApi')).toBeTruthy();
+        expect(index_1.BasicApi.name).toBe(client.basicApi.constructor.name);
+        expect(client.hasOwnProperty('batchApi')).toBeTruthy();
+        expect(index_1.BatchApi.name).toBe(client.batchApi.constructor.name);
+        expect(client.hasOwnProperty('searchApi')).toBeTruthy();
+        expect(index_1.SearchApi.name).toBe(client.searchApi.constructor.name);
+    });
+});
+//# sourceMappingURL=leads.spec.js.map
