@@ -1,7 +1,7 @@
-
 # HubSpot CRM Integration
 
 This integration allows you to connect Botpress with HubSpot CRM, enabling various CRM operations directly through your chatbot.
+
 
 ## Table of Contents
 
@@ -23,29 +23,23 @@ This integration allows you to connect Botpress with HubSpot CRM, enabling vario
     - [Contacts](#contacts-1)
     - [Companies](#companies-1)
     - [Tickets](#tickets-1)
-    - [Deals](#deals-1)
     - [Example with Multiple Filter Groups](#example-with-multiple-filter-groups-andor-logic)
+        - [Example 1: Using AND logic within a filter group](#example-1-using-and-logic-within-a-filter-group)
+        - [Example 2: Using OR logic between filter groups](#example-2-using-or-logic-between-filter-groups)
+        - [Example 3: Combining AND and OR logic](#example-3-combining-and-and-or-logic)
 7. [Properties](#properties)
-
----
 
 ## Introduction
 
-This guide provides instructions on using HubSpot CRM integration to manage various CRM operations, such as creating, updating, deleting, and searching for contacts, companies, tickets, and deals.
-
----
+This guide provides instructions on using HubSpot CRM integration to manage various CRM operations, such as creating, updating, deleting, and searching for contacts, companies, and tickets.
 
 ## Seeing Property IDs
 
 To view the internal property names for HubSpot properties, refer to the following link: [Internal HubSpot Property Names](https://community.hubspot.com/t5/APIs-Integrations/Internal-HubSpot-property-name-for-Contact-Owner/m-p/952044).
 
----
-
 ## Finding Property IDs
 
 You can find the properties and their IDs at this link: [HubSpot Property Settings](https://app.hubspot.com/property-settings/46425249/properties?type=0-1&eschref=%2Fcontacts%2F46425249%2Fobjects%2F0-1%2Frestore).
-
----
 
 ## Actions
 
@@ -79,14 +73,11 @@ You can find the properties and their IDs at this link: [HubSpot Property Settin
 - Create a Deal
 - Delete a Deal
 - Update a Deal
-- Update Deal Stage
-- Search Deals
+- Search Deal
 
 ### Other
 
 - Make an API Call
-
----
 
 ## Search
 
@@ -105,8 +96,15 @@ You can find the properties and their IDs at this link: [HubSpot Property Settin
       ]
     }
   ],
-  "sorts": ["createdate"],
-  "limit": 10
+  "sorts": [
+    {
+      "propertyName": "createdate",
+      "direction": "DESCENDING"
+    }
+  ],
+  "properties": ["name", "industry", "annualrevenue"],
+  "limit": 100,
+  "after": 0
 }
 ```
 
@@ -125,8 +123,15 @@ You can find the properties and their IDs at this link: [HubSpot Property Settin
       ]
     }
   ],
-  "sorts": ["createdate"],
-  "limit": 10
+  "sorts": [
+    {
+      "propertyName": "createdate",
+      "direction": "DESCENDING"
+    }
+  ],
+  "properties": ["createdate", "firstname", "lastname", "email"],
+  "limit": 100,
+  "after": 0
 }
 ```
 
@@ -145,12 +150,19 @@ You can find the properties and their IDs at this link: [HubSpot Property Settin
       ]
     }
   ],
-  "sorts": ["createdate"],
-  "limit": 10
+  "sorts": [
+    {
+      "propertyName": "createdate",
+      "direction": "DESCENDING"
+    }
+  ],
+  "properties": ["createdate", "subject", "content", "status"],
+  "limit": 100,
+  "after": 0
 }
 ```
 
-### Search for Deals
+#### Search for Deals
 
 ```json
 {
@@ -160,7 +172,7 @@ You can find the properties and their IDs at this link: [HubSpot Property Settin
         {
           "propertyName": "amount",
           "operator": "GT",
-          "value": "5000"
+          "value": "10000"
         },
         {
           "propertyName": "dealstage",
@@ -174,8 +186,6 @@ You can find the properties and their IDs at this link: [HubSpot Property Settin
   "limit": 10
 }
 ```
-
----
 
 ## Using Actions
 
@@ -193,18 +203,24 @@ To get a contact, simply provide the contact ID.
 
 #### Create a Contact
 
+When creating a new contact, you should include at least one of the following properties: email, firstname, or lastname. It is recommended to always include email to avoid duplicate contacts in HubSpot.
+
 ```json
 {
   "properties": {
-    "email": "example@gmail.com",
-    "firstname": "John",
-    "lastname": "Doe",
-    "phone": "123-456-7890"
+    "email": "milosarsic14@gmail.com",
+    "firstname": "Milos",
+    "lastname": "Arsik",
+    "phone": "(226) 700-0079",
+    "company": "HubSpot",
+    "hubspot_owner_id": "117816668"
   }
 }
 ```
 
 #### Delete a Contact
+
+To delete a contact, simply provide the contact ID.
 
 ```json
 {
@@ -214,11 +230,112 @@ To get a contact, simply provide the contact ID.
 
 #### Update a Contact
 
+Perform a partial update of a contact identified by `{contactId}`. `{contactId}` refers to the internal object ID. Provided property values will be overwritten. Read-only and non-existent properties will be ignored.
+
 ```json
 {
   "contactId": "12345",
   "properties": {
-    "phone": "123-456-7891"
+    "phone": "(226) 700-0080",
+    "company": "HubSpot Inc."
+  }
+}
+```
+
+### Companies
+
+#### Get a Company
+
+To get a company, simply provide the company ID.
+
+```json
+{
+  "companyId": "67890"
+}
+```
+
+#### Create a Company
+
+When creating a new company, include relevant properties.
+
+```json
+{
+  "properties": {
+    "name": "HubSpot",
+    "industry": "Technology",
+    "annualrevenue": "1000000"
+  }
+}
+```
+
+#### Delete a Company
+
+To delete a company, simply provide the company ID.
+
+```json
+{
+  "companyId": "67890"
+}
+```
+
+#### Update a Company
+
+Perform a partial update of a company identified by `{companyId}`. `{companyId}` refers to the internal object ID. Provided property values will be overwritten. Read-only and non-existent properties will be ignored.
+
+```json
+{
+  "companyId": "67890",
+  "properties": {
+    "annualrevenue": "1500000"
+  }
+}
+```
+
+### Tickets
+
+#### Get a Ticket
+
+To get a ticket, simply provide the ticket ID.
+
+```json
+{
+  "ticketId": "54321"
+}
+```
+
+#### Create a Ticket
+
+When creating a new ticket, include relevant properties.
+
+```json
+{
+  "properties": {
+    "subject": "Need help with integration",
+    "content": "Details about the issue...",
+    "status": "open"
+  }
+}
+```
+
+#### Delete a Ticket
+
+To delete a ticket, simply provide the ticket ID.
+
+```json
+{
+  "ticketId": "54321"
+}
+```
+
+#### Update a Ticket
+
+Perform a partial update of a ticket identified by `{ticketId}`. `{ticketId}` refers to the internal object ID. Provided property values will be overwritten. Read-only and non-existent properties will be ignored.
+
+```json
+{
+  "ticketId": "54321",
+  "properties": {
+    "status": "closed"
   }
 }
 ```
@@ -277,68 +394,120 @@ To get a deal, provide the deal ID.
 }
 ```
 
-#### Search for Deals
+## Properties
 
+Properties are the specific fields you want to retrieve for each record. You can specify which properties to include in the response. In the examples above, properties like `createdate`, `firstname`, and `lastname` are requested. You can customize this based on the fields available in your HubSpot account.
+
+Example:
+
+```json
+"properties": ["createdate", "firstname", "lastname", "email", "phone"]
+```
+
+### Example with Multiple Filter Groups (AND/OR logic)
+
+#### Example 1: Using AND logic within a filter group
 ```json
 {
   "filterGroups": [
     {
       "filters": [
         {
-          "propertyName": "amount",
-          "operator": "GT",
-          "value": "10000"
+          "propertyName": "createdate",
+          "operator": "GTE",
+          "value": "1622505600000"
         },
         {
-          "propertyName": "dealstage",
+          "propertyName": "email",
           "operator": "EQ",
-          "value": "closedwon"
+          "value": "example@hubspot.com"
         }
       ]
     }
   ],
-  "sorts": ["amount"],
-  "limit": 10
+  "sorts": [
+    {
+      "propertyName": "createdate",
+      "direction": "DESCENDING"
+    }
+  ],
+  "properties": ["createdate", "firstname", "lastname"],
+  "limit": 100,
+  "after": 0
 }
 ```
 
----
-
-### Properties
-
-Properties are the specific fields you want to retrieve for each record. Example:
-
-```json
-"properties": ["createdate", "amount", "dealname", "dealstage"]
-```
-
----
-
-### Example with Multiple Filter Groups
-
-#### Example 1: AND Logic
-
+#### Example 2: Using OR logic between filter groups
 ```json
 {
   "filterGroups": [
     {
       "filters": [
         {
-          "propertyName": "amount",
-          "operator": "GT",
-          "value": "10000"
-        },
+          "propertyName": "createdate",
+          "operator": "GTE",
+          "value": "1622505600000"
+        }
+      ]
+    },
+    {
+      "filters": [
         {
-          "propertyName": "dealstage",
+          "propertyName": "email",
           "operator": "EQ",
-          "value": "closedwon"
+          "value": "example@hubspot.com"
         }
       ]
     }
   ],
-  "sorts": ["amount"],
-  "limit": 10
+  "sorts": [
+    {
+      "propertyName": "createdate",
+      "direction": "DESCENDING"
+    }
+  ],
+  "properties": ["createdate", "firstname", "lastname"],
+  "limit": 100,
+  "after": 0
 }
 ```
 
----
+#### Example 3: Combining AND and OR logic
+```json
+{
+  "filterGroups": [
+    {
+      "filters": [
+        {
+          "propertyName": "createdate",
+          "operator": "GTE",
+          "value": "1622505600000"
+        },
+        {
+          "propertyName": "email",
+          "operator": "EQ",
+          "value": "example@hubspot.com"
+        }
+      ]
+    },
+    {
+      "filters": [
+        {
+          "propertyName": "firstname",
+          "operator": "EQ",
+          "value": "Jane"
+        }
+      ]
+    }
+  ],
+  "sorts": [
+    {
+      "propertyName": "createdate",
+      "direction": "DESCENDING"
+    }
+  ],
+  "properties": ["createdate", "firstname", "lastname"],
+  "limit": 100,
+  "after": 0
+}
+```
